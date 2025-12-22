@@ -1,36 +1,10 @@
 import Animal_Demykin.animals.Animal;
+import Animal_Demykin.data.Command;
 import Animal_Demykin.animals.Cat;
 import Animal_Demykin.animals.Dog;
 import Animal_Demykin.animals.Duck;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-// Enum для команд меню
-enum Command {
-    ADD("add"),
-    LIST("list"),
-    EXIT("exit");
-
-    private final String command;
-
-    Command(String command) {
-        this.command = command;
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
-    // Метод для получения команды из строки
-    public static Command fromString(String text) {
-        for (Command cmd : Command.values()) {
-            if (cmd.command.equalsIgnoreCase(text.trim())) {
-                return cmd;
-            }
-        }
-        return null;
-    }
-}
 
 public class Main {
     private static ArrayList<Animal> animals = new ArrayList<>();
@@ -73,17 +47,59 @@ public class Main {
     private static void addAnimal() {
         System.out.println("\n=== Добавление животного ===");
         System.out.println("Выберите тип животного: cat, dog, duck");
-        System.out.print("Тип: ");
-        String type = scanner.nextLine().trim().toLowerCase();
+
+        //валидация тип животного
+        String type = "";
+        while (true) {
+            System.out.print("Тип: ");
+            type = scanner.nextLine().trim().toLowerCase();
+
+            if (type.equals("cat") || type.equals("dog") || type.equals("duck")) {
+                break;
+            } else {
+                System.out.println("Неизвестный тип животного! Введите cat, dog или duck.");
+            }
+        }
 
         System.out.print("Имя: ");
         String name = scanner.nextLine().trim();
 
-        System.out.print("Возраст (лет): ");
-        int age = Integer.parseInt(scanner.nextLine().trim());
+        //ввод и валидация возраста
+        int age = 0;
+        boolean validAge = false;
+        while (!validAge) {
+            System.out.print("Возраст (лет): ");
+            String ageInput = scanner.nextLine().trim();
 
-        System.out.print("Вес (кг): ");
-        double weight = Double.parseDouble(scanner.nextLine().trim());
+            try {
+                age = Integer.parseInt(ageInput);
+                if (age >= 0) { // Дополнительная проверка на неотрицательность
+                    validAge = true;
+                } else {
+                    System.out.println("Ошибка: возраст не может быть отрицательным. Введите положительное число.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите целое число для возраста. Например: 3, 5, 10");
+            }
+        }
+
+        //ввод и валидация веса
+
+        double weight = 0;
+        while (true) {
+            System.out.print("Вес (кг): ");
+            String weightInput = scanner.nextLine().trim().replace(',', '.');
+            try {
+                weight = Double.parseDouble(weightInput);
+                if (weight > 0) {
+                    break;
+                } else {
+                    System.out.println("Ошибка: вес должен быть положительным.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите число для веса (можно с десятичной точкой).");
+            }
+        }
 
         System.out.print("Цвет: ");
         String color = scanner.nextLine().trim();
@@ -107,6 +123,7 @@ public class Main {
         animals.add(animal);
         System.out.print("Животное добавлено! Оно говорит: ");
         animal.say();
+
     }
 
     private static void listAnimals() {
