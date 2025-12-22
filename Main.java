@@ -46,15 +46,15 @@ public class Main {
             System.out.println("\n=== Главное меню ===");
             System.out.println("Доступные команды: add, list, exit");
             System.out.print("Введите команду: ");
-
+            
             String input = scanner.nextLine();
             Command command = Command.fromString(input);
-
+            
             if (command == null) {
                 System.out.println("Неизвестная команда. Попробуйте снова.");
                 continue;
             }
-
+            
             switch (command) {
                 case ADD:
                     addAnimal();
@@ -75,19 +75,19 @@ public class Main {
         System.out.println("Выберите тип животного: cat, dog, duck");
         System.out.print("Тип: ");
         String type = scanner.nextLine().trim().toLowerCase();
-
+        
         System.out.print("Имя: ");
         String name = scanner.nextLine().trim();
-
+        
         System.out.print("Возраст (лет): ");
         int age = Integer.parseInt(scanner.nextLine().trim());
-
+        
         System.out.print("Вес (кг): ");
         double weight = Double.parseDouble(scanner.nextLine().trim());
-
+        
         System.out.print("Цвет: ");
         String color = scanner.nextLine().trim();
-
+        
         Animal animal;
         switch (type) {
             case "cat":
@@ -103,19 +103,18 @@ public class Main {
                 System.out.println("Неизвестный тип животного!");
                 return;
         }
-
+        
         animals.add(animal);
         System.out.print("Животное добавлено! Оно говорит: ");
         animal.say();
     }
-
 
     private static void listAnimals() {
         if (animals.isEmpty()) {
             System.out.println("Список животных пуст.");
             return;
         }
-
+        
         System.out.println("\n=== Список всех животных ===");
         for (Animal animal : animals) {
             System.out.println(animal.toString());
