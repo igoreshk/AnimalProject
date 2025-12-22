@@ -1,7 +1,7 @@
 ../<br>
 ├── Main.java<br>
-├── Animal.java<br>
 └── animals/<br>
+    ├── Animal.java<br>
     ├── Cat.java<br>
     ├── Dog.java<br>
     ├── Duck.java<br>
