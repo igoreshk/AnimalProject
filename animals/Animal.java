@@ -69,7 +69,7 @@ public abstract class Animal {
         if (age % 100 >= 11 && age % 100 <= 19) {
             return "лет";
         }
-
+        
         switch (age % 10) {
             case 1:
                 return "год";
