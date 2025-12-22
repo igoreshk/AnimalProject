@@ -1,5 +1,8 @@
+package Animal_Demykin;
+
 import Animal_Demykin.animals.Animal;
 import Animal_Demykin.data.Command;
+import Animal_Demykin.factory.AnimalFactory;
 import Animal_Demykin.animals.Cat;
 import Animal_Demykin.animals.Dog;
 import Animal_Demykin.animals.Duck;
@@ -105,19 +108,17 @@ public class Main {
         String color = scanner.nextLine().trim();
 
         Animal animal;
-        switch (type) {
-            case "cat":
-                animal = new Cat(name, age, weight, color);
-                break;
-            case "dog":
-                animal = new Dog(name, age, weight, color);
-                break;
-            case "duck":
-                animal = new Duck(name, age, weight, color);
-                break;
-            default:
-                System.out.println("Неизвестный тип животного!");
-                return;
+        try {
+            animal = AnimalFactory.createAnimal(type, name, age, weight, color);
+
+            // Дополнительная логика для утки
+            if (type.equalsIgnoreCase("duck")) {
+                System.out.println("Я лечу");
+            }
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Неизвестный тип животного!");
+            return;
         }
 
         animals.add(animal);
