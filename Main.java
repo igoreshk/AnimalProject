@@ -3,9 +3,6 @@ package Animal_Demykin;
 import Animal_Demykin.animals.Animal;
 import Animal_Demykin.data.Command;
 import Animal_Demykin.factory.AnimalFactory;
-import Animal_Demykin.animals.Cat;
-import Animal_Demykin.animals.Dog;
-import Animal_Demykin.animals.Duck;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -76,7 +73,7 @@ public class Main {
 
             try {
                 age = Integer.parseInt(ageInput);
-                if (age >= 0) { // Дополнительная проверка на неотрицательность
+                if (age >= 0) { // Дополнительная проверка на положительное значение
                     validAge = true;
                 } else {
                     System.out.println("Ошибка: возраст не может быть отрицательным. Введите положительное число.");
