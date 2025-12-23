@@ -1,3 +1,10 @@
+AnimalProject/
+├── Main.java         
+├── animals/           
+├── data/
+├── factory/           
+└── README.md          
+
 <div align="center">
   <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; font-family: monospace; text-align: left;">
     <tr>
